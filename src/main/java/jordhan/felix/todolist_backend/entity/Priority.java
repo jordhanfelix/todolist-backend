@@ -1,11 +1,11 @@
 package jordhan.felix.todolist_backend.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 
+@Entity
+@Table(name = "tb_priorities")
 public class Priority implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -40,9 +40,9 @@ public class Priority implements Serializable {
     }
 
     public enum Enum {
-        LOW(2L, "low"),
-        MEDIUM(1L,"medium"),
-        HIGH(0L, "high");
+        LOW(1L, "low"),
+        MEDIUM(2L,"medium"),
+        HIGH(3L, "high");
 
         private Long id;
         private String description;
