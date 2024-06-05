@@ -1,6 +1,7 @@
 package jordhan.felix.todolist_backend.entity;
 
 import jakarta.persistence.*;
+import jordhan.felix.todolist_backend.controller.Dto.OutputTaskDto;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -26,7 +27,7 @@ public class Task  implements Serializable {
     private Priority priority;
 
     private String name;
-    private String Description;
+    private String description;
     private boolean complete;
 
     @CreationTimestamp
@@ -36,6 +37,20 @@ public class Task  implements Serializable {
     private Instant updatedAt;
 
     public Task() {
+    }
+
+    public Task(Priority priority, String name, String description) {
+        this.priority = priority;
+        this.name = name;
+        this.description = description;
+        this.complete = false;
+    }
+
+    public Task(Priority priority, String name, String description, boolean complete) {
+        this.priority = priority;
+        this.name = name;
+        this.description = description;
+        this.complete = complete;
     }
 
     public Long getId() {
@@ -71,11 +86,11 @@ public class Task  implements Serializable {
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     public boolean isComplete() {
@@ -100,6 +115,15 @@ public class Task  implements Serializable {
 
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public OutputTaskDto toDto(){
+        String user_name = null;
+        if(user != null){
+            user_name = user.getName();
+        }
+
+        return new OutputTaskDto(id, user_name, priority.getDescription(), this.name, description, complete);
     }
 
     @Override
