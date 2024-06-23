@@ -1,6 +1,7 @@
 package jordhan.felix.todolist_backend.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -23,6 +24,7 @@ public class User implements Serializable {
     private String name;
     private String email;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Task> tasks= new ArrayList<>();
 
